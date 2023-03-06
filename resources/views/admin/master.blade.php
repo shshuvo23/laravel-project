@@ -19,6 +19,7 @@
     <link href="{{asset('/')}}admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="{{asset('/')}}admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- App Css-->
     <link href="{{asset('/')}}admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
@@ -260,7 +261,7 @@
                                 <span>Brand</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="">All Brand</a></li>
+                                <li><a href="{{route('brand.manage')}}">All Brand</a></li>
                                 <li><a href="{{route('brand')}}">Add Brand</a></li>
                             </ul>
                         </li>

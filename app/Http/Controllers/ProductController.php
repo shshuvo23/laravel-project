@@ -25,4 +25,15 @@ class ProductController extends Controller
         Product::createProduct($request);
         return redirect('/products/add')->with('message', 'Create Successfully');
     }
+
+    public function edit($id)
+    {
+        return view('admin.product.edit', ['product' => Product::find($id), 'categories' => Category::all(), 'brands' => Brand::all()]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        Product::updateProduct($request, $id);
+        return redirect('/products')->with('message', 'Updated Successfully');
+    }
 }

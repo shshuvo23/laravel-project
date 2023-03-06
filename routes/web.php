@@ -19,6 +19,8 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/',[HomeController::class, 'product'])->name('home.product');
+Route::get('/product-detail/{id}',[HomeController::class, 'productDetail'])->name('home.product-detail');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,9 +40,14 @@ Route::middleware([
 
     Route::get('/brand', [BrandController::class, 'index'])->name('brand');
     Route::post('/brand/add', [BrandController::class, 'create'])->name('brand.add');
+    Route::get('/brand/manage', [BrandController::class, 'manage'])->name('brand.manage');
+    Route::get('/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('/brand/update{id}', [BrandController::class, 'update'])->name('brand.update');
 
     Route::get('/products', [ProductController::class, 'index'])->name('product');
     Route::get('/products/add', [ProductController::class, 'addproduct'])->name('product.add');
     Route::post('/products/add-product', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/products/edit-product/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/products/update-product/{id}', [ProductController::class, 'update'])->name('product.update');
 
 });

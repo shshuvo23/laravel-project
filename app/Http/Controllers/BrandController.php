@@ -17,4 +17,19 @@ class BrandController extends Controller
         Brand::createBrand($request);
         return redirect('/brand')->with('message', 'Created sucessfully');
     }
+
+    public function manage()
+    {
+        return view('admin.brand.manage',['brands' => Brand::all()]);
+    }
+
+    public function edit($id)
+    {
+        return view('admin.brand.edit', ['brand' => Brand::find($id)]);
+    }
+    public function update(Request $request, $id)
+    {
+        Brand::updateBrand($request, $id);
+        return redirect('/brand/edit')->with('message', 'Updated successfully');
+    }
 }

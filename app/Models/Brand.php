@@ -19,4 +19,11 @@ class Brand extends Model
         self::$brand->name = $request->name;
         self::$brand->save();
     }
+
+    public static function updateBrand($request, $id)
+    {
+        self::$brand = Brand::find($id);
+        self::$brand->name = $request->name;
+        self::$brand->save();
+    }
 }
