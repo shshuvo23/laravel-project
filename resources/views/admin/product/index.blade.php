@@ -30,7 +30,11 @@
                                             <td>{{ $product->price }}</td>
                                             <td>{{ $product->status == 1 ? 'Active' : 'Deactivate' }}</td>
                                             <td>
-                                                <img src="{{ asset($product->image) }}" alt="" height="50px">
+                                                <div style="display: flex;">
+                                                    @foreach (explode(",", $product->image) as $imageUrl)
+                                                        <img src="{{ $imageUrl }}" alt="{{ $product->title }} image" height="150" width="100">
+                                                    @endforeach
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="col">

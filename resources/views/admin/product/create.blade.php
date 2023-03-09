@@ -61,7 +61,7 @@
                             <div class="row mb-3">
                                 <label for="" class="col-md-3">Image</label>
                                 <div class="col-md-9">
-                                    <input type="file" name="image" id="" class="form-control">
+                                    <input type="file" name="image[]" id="" class="form-control" multiple required>
                                 </div>
                             </div>
                             <div class="row mb-3">

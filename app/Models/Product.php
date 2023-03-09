@@ -11,13 +11,17 @@ class Product extends Model
     public static $image,$imageName,$imageDirectory,$product,$imagePath,$imageExtension;
 
     public static function getImageUrl($request){
-        self::$image = $request->file('image');
-        self::$imageExtension = self::$image->getClientOriginalExtension();
-        self::$imageName = time().'.'.self::$imageExtension;
-        self::$imageDirectory = 'product-image/';
-        self::$image->move(self::$imageDirectory,self::$imageName);
-
-        return self::$imageDirectory.self::$imageName;
+        // self::$image = $request->file('image');
+        $imageUrls = [];
+        foreach ($request->file('image') as $image) {
+            self::$imageExtension = $image->getClientOriginalExtension();
+            self::$imageName = time().'.'.self::$imageExtension;
+            self::$imageDirectory = 'product-image/';
+            $image->move(self::$imageDirectory,self::$imageName);
+            $imageUrl = self::$imageDirectory.self::$imageName;
+            $imageUrls[] = $imageUrl;
+        }
+        return $imageUrls;
     }
 
     public static function createProduct($request)
@@ -28,7 +32,7 @@ class Product extends Model
         self::$product->brand_id    = $request->brand_id;
         self::$product->title       = $request->title;
         self::$product->description = $request->description;
-        self::$product->image       = self::getImageUrl($request);
+        self::$product->image       = implode(",", self::getImageUrl($request));;
         self::$product->code        = $request->code;
         self::$product->price       = $request->price;
         self::$product->save();
@@ -42,7 +46,7 @@ class Product extends Model
                 unlink(self::$product->image);
             }
 
-            self::$imagePath = self::getImageUrl($request);
+            $imageUrls = self::getImageUrl($request);
 
         }
         else{
@@ -53,7 +57,7 @@ class Product extends Model
         self::$product->brand_id    = $request->brand_id;
         self::$product->title       = $request->title;
         self::$product->description =$request->description;
-        self::$product->image       =self::$imagePath;
+        self::$product->image = implode(",", $imageUrls);
         self::$product->code        =$request->code;
         self::$product->price       = $request->price;
         self::$product->save();

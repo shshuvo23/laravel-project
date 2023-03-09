@@ -16,11 +16,17 @@ class HomeController extends Controller
         $this->brands = Brand::all();
         return view('home.index', ['categories' => $this->categories, 'brands' => $this->brands]);
     }
-    public function product()
+    public function product($category_id = null)
     {
-
-        return view('home.product.index',['categories' => Category::all(), 'products' => Product::all()]);
+        $products = Product::query();
+        if ($category_id) {
+            $products = $products->where('category_id', $category_id);
+        }
+        $products = $products->get();
+        return view('home.product.index', ['categories' => Category::all(), 'products' => $products, 'category_id' => $category_id]);
     }
+
+
 
     public function productDetail($id)
     {

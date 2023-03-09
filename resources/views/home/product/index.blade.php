@@ -13,11 +13,11 @@
                 <!-- Tab Start -->
                 <div class="nav-center">
                     <ul class="product-tab-nav nav align-items-center justify-content-center">
-                        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
-                            href="#tab-product--all">All</a></li>
+                        <li class="nav-item"><a class="nav-link {{ !$category_id ? 'active' : '' }}" data-bs-toggle="tab"
+                            href="{{ route('home.product') }}">All</a></li>
                         @foreach ($categories as $category)
-                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                href="#tab-product--new">{{$category->name}}</a>
+                        <li class="nav-item"><a class="nav-link {{ $category_id == $category->id ? 'active' : '' }}" data-bs-toggle="tab"
+                                href="{{ route('home.product', ['category_id' => $category->id]) }}">{{$category->name}}</a>
                         </li>
                         @endforeach
                     </ul>
@@ -33,6 +33,7 @@
         <div class="col">
             <div class="tab-content mb-30px0px">
                 <!-- 1st tab start -->
+
                 <div class="tab-pane fade show active" id="tab-product--all">
                     <div class="row">
                         @foreach ($products as $product)
@@ -62,18 +63,23 @@
                                         To Cart</button>
                                 </div>
                                 <div class="content">
-                                    <span class="ratings">
-                                        <span class="rating-wrap">
-                                            <span class="star" style="width: 100%"></span>
-                                        </span>
-                                        <span class="rating-num">( 5 Review )</span>
-                                    </span>
-                                    <h5 class="title"><a href="single-product.html">{{$product->title}}
-                                        </a>
-                                    </h5>
-                                    <span class="price">
-                                        <span class="new">{{$product->price}}</span>
-                                    </span>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <span class="ratings">
+                                                <span class="rating-wrap">
+                                                    <span class="star" style="width: 100%"></span>
+                                                </span>
+                                                <span class="rating-num">( 5 Review )</span>
+                                            </span>
+                                            <h5 class="title"><a href="single-product.html">{{$product->title}}
+                                                </a>
+                                            </h5>
+                                            <span class="price">
+                                                <span class="new">{{$product->price}}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="{{route('home.product-detail', ['id'=>$product->id])}}" class="btn btn-outline-warning">Details</a>
                                 </div>
                             </div>
                         </div>
